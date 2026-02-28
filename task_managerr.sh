@@ -28,6 +28,7 @@ add_task() {
 
     read -rp "Due date (YYYY-MM-DD): " date
     [[ ! "$date" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] && echo -e "${RED}Invalid date format!${NC}" && return
+    ! date -d "$date" &>/dev/null && echo -e "${RED}Invalid date!${NC}" && return
 
     echo "$(new_id)|$title|$priority|$date|pending" >> "$FILE"
     echo -e "${GREEN}Task added!${NC}"
